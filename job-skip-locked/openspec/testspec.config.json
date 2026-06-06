@@ -1,0 +1,11 @@
+{
+  "sdd": "openspec",
+  "agent": "claude",
+  "stubs": {
+    "unit": true,
+    "integration": true
+  },
+  "unitFramework": "vitest",
+  "loadHints": true,
+  "chaosHints": true
+}
