@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head th:replace="~{fragments/menu :: head('Contratação')}"></head>
+<body>
+<nav th:replace="~{fragments/menu :: menu('contratacoes')}"></nav>
+<main>
+    <div id="alerts"></div>
+    <div id="content" th:fragment="content">
+        <div class="toolbar">
+            <h1>Contratação</h1>
+            <button class="btn-light" hx-get="/contratacoes" hx-target="#content" hx-swap="innerHTML">Voltar</button>
+        </div>
+        <dl class="detail card">
+            <dt>ID</dt><dd th:text="${contratacao.idContratacao}"></dd>
+            <dt>Cliente</dt><dd th:text="${contratacao.cliente.nome}"></dd>
+            <dt>Produto</dt><dd th:text="${contratacao.produto.nome}"></dd>
+            <dt>Data</dt><dd th:text="${contratacao.dataContratacao}"></dd>
+            <dt>Status</dt><dd th:text="${contratacao.status}"></dd>
+        </dl>
+    </div>
+</main>
+</body>
+</html>

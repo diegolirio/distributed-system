@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head th:replace="~{fragments/menu :: head('Erro')}"></head>
+<body>
+<!-- Inline alert fragment (swapped into #alerts on HTMX errors) -->
+<div th:fragment="alert" class="alert error" th:text="${mensagem}">Ocorreu um erro.</div>
+
+<!-- Full error page (non-HTMX requests) -->
+<th:block th:fragment="page">
+    <nav th:replace="~{fragments/menu :: menu('')}"></nav>
+    <main>
+        <div class="alert error" th:text="${mensagem}">Ocorreu um erro.</div>
+        <a class="btn btn-light" th:href="@{/}">Voltar para a home</a>
+    </main>
+</th:block>
+</body>
+</html>

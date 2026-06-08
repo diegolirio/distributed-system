@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head th:replace="~{fragments/menu :: head('Tipos de Transação')}"></head>
+<body>
+<nav th:replace="~{fragments/menu :: menu('tipos-transacao')}"></nav>
+<main>
+    <div id="alerts"></div>
+    <div id="content" th:fragment="content">
+        <div class="toolbar">
+            <h1>Tipos de Transação</h1>
+            <button hx-get="/tipos-transacao/new" hx-target="#content" hx-swap="innerHTML">+ Novo</button>
+        </div>
+        <div th:if="${#lists.isEmpty(tipos)}" class="empty">Nenhum tipo de transação cadastrado.</div>
+        <table th:unless="${#lists.isEmpty(tipos)}">
+            <thead>
+            <tr><th>Descrição</th><th>Sinal</th><th></th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="t : ${tipos}">
+                <td th:text="${t.descricao}"></td>
+                <td th:text="${t.sinal == 1} ? 'Crédito (+1)' : 'Débito (-1)'"></td>
+                <td class="actions">
+                    <button class="btn-light" th:hx-get="@{/tipos-transacao/{id}(id=${t.idTipo})}" hx-target="#content" hx-swap="innerHTML">Ver</button>
+                    <button class="btn-light" th:hx-get="@{/tipos-transacao/{id}/edit(id=${t.idTipo})}" hx-target="#content" hx-swap="innerHTML">Editar</button>
+                    <button class="btn-danger" th:hx-delete="@{/tipos-transacao/{id}(id=${t.idTipo})}" hx-target="#content" hx-swap="innerHTML" hx-confirm="Excluir este tipo?">Excluir</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head th:replace="~{fragments/menu :: head('Cliente')}"></head>
+<body>
+<nav th:replace="~{fragments/menu :: menu('clientes')}"></nav>
+<main>
+    <div id="alerts"></div>
+    <div id="content" th:fragment="content">
+        <div class="toolbar">
+            <h1>Cliente</h1>
+            <button class="btn-light" hx-get="/clientes" hx-target="#content" hx-swap="innerHTML">Voltar</button>
+        </div>
+        <dl class="detail card">
+            <dt>ID</dt><dd th:text="${cliente.idCliente}"></dd>
+            <dt>Nome</dt><dd th:text="${cliente.nome}"></dd>
+            <dt>CPF</dt><dd th:text="${cliente.cpf}"></dd>
+            <dt>CNPJ</dt><dd th:text="${cliente.cnpj} ?: '—'"></dd>
+            <dt>E-mail</dt><dd th:text="${cliente.email}"></dd>
+            <dt>Segmento</dt><dd th:text="${cliente.segmento}"></dd>
+            <dt>Criado em</dt><dd th:text="${cliente.criadoEm}"></dd>
+        </dl>
+    </div>
+</main>
+</body>
+</html>

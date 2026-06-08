@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head th:replace="~{fragments/menu :: head('Cliente')}"></head>
+<body>
+<nav th:replace="~{fragments/menu :: menu('clientes')}"></nav>
+<main>
+    <div id="alerts"></div>
+    <div id="content">
+        <div th:fragment="form" class="card">
+            <h1 th:text="${titulo}">Cliente</h1>
+            <form th:object="${form}" th:attr="hx-post=${hxUrl}" hx-target="#content" hx-swap="innerHTML">
+                <label>CPF
+                    <input type="text" th:field="*{cpf}" maxlength="11" placeholder="somente dígitos"/>
+                    <span class="error" th:errors="*{cpf}"></span>
+                </label>
+                <label>CNPJ (opcional)
+                    <input type="text" th:field="*{cnpj}" maxlength="14"/>
+                    <span class="error" th:errors="*{cnpj}"></span>
+                </label>
+                <label>Nome
+                    <input type="text" th:field="*{nome}"/>
+                    <span class="error" th:errors="*{nome}"></span>
+                </label>
+                <label>E-mail
+                    <input type="email" th:field="*{email}"/>
+                    <span class="error" th:errors="*{email}"></span>
+                </label>
+                <label>Segmento
+                    <select th:field="*{segmento}">
+                        <option value="">Selecione...</option>
+                        <option th:each="s : ${segmentos}" th:value="${s}" th:text="${s}"></option>
+                    </select>
+                    <span class="error" th:errors="*{segmento}"></span>
+                </label>
+                <div class="actions">
+                    <button type="submit">Salvar</button>
+                    <button type="button" class="btn-light" hx-get="/clientes" hx-target="#content" hx-swap="innerHTML">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>

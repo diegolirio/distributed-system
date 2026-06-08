@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head th:replace="~{fragments/menu :: head('Produto')}"></head>
+<body>
+<nav th:replace="~{fragments/menu :: menu('produtos')}"></nav>
+<main>
+    <div id="alerts"></div>
+    <div id="content" th:fragment="content">
+        <div class="toolbar">
+            <h1>Produto</h1>
+            <button class="btn-light" hx-get="/produtos" hx-target="#content" hx-swap="innerHTML">Voltar</button>
+        </div>
+        <dl class="detail card">
+            <dt>ID</dt><dd th:text="${produto.idProduto}"></dd>
+            <dt>Nome</dt><dd th:text="${produto.nome}"></dd>
+            <dt>Categoria</dt><dd th:text="${produto.categoria}"></dd>
+            <dt>Taxa de Juros</dt><dd th:text="${produto.taxaJuros}"></dd>
+            <dt>Ativo</dt><dd th:text="${produto.ativo} ? 'Sim' : 'Não'"></dd>
+        </dl>
+    </div>
+</main>
+</body>
+</html>

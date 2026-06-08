@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head th:replace="~{fragments/menu :: head('Transação')}"></head>
+<body>
+<nav th:replace="~{fragments/menu :: menu('transacoes')}"></nav>
+<main>
+    <div id="alerts"></div>
+    <div id="content">
+        <div th:fragment="form" class="card">
+            <h1 th:text="${titulo}">Transação</h1>
+            <form th:object="${form}" th:attr="hx-post=${hxUrl}" hx-target="#content" hx-swap="innerHTML">
+                <label>Conta
+                    <select th:field="*{idConta}">
+                        <option value="">Selecione...</option>
+                        <option th:each="c : ${contas}" th:value="${c.idConta}"
+                                th:text="${c.numero + ' — ' + c.cliente.nome}"></option>
+                    </select>
+                    <span class="error" th:errors="*{idConta}"></span>
+                </label>
+                <label>Produto
+                    <select th:field="*{idProduto}">
+                        <option value="">Selecione...</option>
+                        <option th:each="p : ${produtos}" th:value="${p.idProduto}" th:text="${p.nome}"></option>
+                    </select>
+                    <span class="error" th:errors="*{idProduto}"></span>
+                </label>
+                <label>Tipo de Transação
+                    <select th:field="*{idTipo}">
+                        <option value="">Selecione...</option>
+                        <option th:each="t : ${tipos}" th:value="${t.idTipo}" th:text="${t.descricao}"></option>
+                    </select>
+                    <span class="error" th:errors="*{idTipo}"></span>
+                </label>
+                <label>Contratação (opcional)
+                    <select th:field="*{idContratacao}">
+                        <option value="">— nenhuma —</option>
+                        <option th:each="c : ${contratacoes}" th:value="${c.idContratacao}"
+                                th:text="${c.cliente.nome + ' / ' + c.produto.nome}"></option>
+                    </select>
+                    <span class="error" th:errors="*{idContratacao}"></span>
+                </label>
+                <label>Valor
+                    <input type="number" step="0.01" min="0.01" th:field="*{valor}"/>
+                    <span class="error" th:errors="*{valor}"></span>
+                </label>
+                <label>ID de Idempotência
+                    <input type="text" th:field="*{idIdempotencia}" maxlength="36"/>
+                    <span class="error" th:errors="*{idIdempotencia}"></span>
+                </label>
+                <div class="actions">
+                    <button type="submit">Salvar</button>
+                    <button type="button" class="btn-light" hx-get="/transacoes" hx-target="#content" hx-swap="innerHTML">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>

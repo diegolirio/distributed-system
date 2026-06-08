@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head th:replace="~{fragments/menu :: head('Conta')}"></head>
+<body>
+<nav th:replace="~{fragments/menu :: menu('contas')}"></nav>
+<main>
+    <div id="alerts"></div>
+    <div id="content" th:fragment="content">
+        <div class="toolbar">
+            <h1>Conta</h1>
+            <button class="btn-light" hx-get="/contas" hx-target="#content" hx-swap="innerHTML">Voltar</button>
+        </div>
+        <dl class="detail card">
+            <dt>ID</dt><dd th:text="${conta.idConta}"></dd>
+            <dt>Número</dt><dd th:text="${conta.numero}"></dd>
+            <dt>Cliente</dt><dd th:text="${conta.cliente.nome}"></dd>
+            <dt>Tipo</dt><dd th:text="${conta.tipoConta}"></dd>
+            <dt>Saldo</dt><dd th:text="${conta.saldo}"></dd>
+            <dt>Status</dt><dd th:text="${conta.status}"></dd>
+        </dl>
+    </div>
+</main>
+</body>
+</html>

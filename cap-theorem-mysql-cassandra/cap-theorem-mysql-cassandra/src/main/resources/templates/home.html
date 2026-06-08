@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head th:replace="~{fragments/menu :: head('Home')}"></head>
+<body>
+<nav th:replace="~{fragments/menu :: menu('')}"></nav>
+<main>
+    <h1>CAP Theorem · MySQL</h1>
+    <p>
+        Painel administrativo para gerenciar as entidades da aplicação:
+        clientes, contas, produtos, contratações, tipos de transação e transações.
+        Use o menu acima ou os atalhos abaixo para acessar cada área.
+    </p>
+
+    <div class="home-grid">
+        <a class="tile" th:href="@{/clientes}"><strong>Clientes</strong><span>Cadastro de clientes (PF/PJ)</span></a>
+        <a class="tile" th:href="@{/contas}"><strong>Contas</strong><span>Contas vinculadas a clientes</span></a>
+        <a class="tile" th:href="@{/produtos}"><strong>Produtos</strong><span>Produtos e serviços</span></a>
+        <a class="tile" th:href="@{/contratacoes}"><strong>Contratações</strong><span>Contratações de produtos</span></a>
+        <a class="tile" th:href="@{/tipos-transacao}"><strong>Tipos de Transação</strong><span>Crédito / Débito</span></a>
+        <a class="tile" th:href="@{/transacoes}"><strong>Transações</strong><span>Movimentações financeiras</span></a>
+    </div>
+</main>
+</body>
+</html>

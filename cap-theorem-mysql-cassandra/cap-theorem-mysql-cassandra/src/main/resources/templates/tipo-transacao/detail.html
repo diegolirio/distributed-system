@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head th:replace="~{fragments/menu :: head('Tipo de Transação')}"></head>
+<body>
+<nav th:replace="~{fragments/menu :: menu('tipos-transacao')}"></nav>
+<main>
+    <div id="alerts"></div>
+    <div id="content" th:fragment="content">
+        <div class="toolbar">
+            <h1>Tipo de Transação</h1>
+            <button class="btn-light" hx-get="/tipos-transacao" hx-target="#content" hx-swap="innerHTML">Voltar</button>
+        </div>
+        <dl class="detail card">
+            <dt>ID</dt><dd th:text="${tipo.idTipo}"></dd>
+            <dt>Descrição</dt><dd th:text="${tipo.descricao}"></dd>
+            <dt>Sinal</dt><dd th:text="${tipo.sinal == 1} ? 'Crédito (+1)' : 'Débito (-1)'"></dd>
+        </dl>
+    </div>
+</main>
+</body>
+</html>

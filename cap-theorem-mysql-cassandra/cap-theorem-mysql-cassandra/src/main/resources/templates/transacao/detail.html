@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head th:replace="~{fragments/menu :: head('Transação')}"></head>
+<body>
+<nav th:replace="~{fragments/menu :: menu('transacoes')}"></nav>
+<main>
+    <div id="alerts"></div>
+    <div id="content" th:fragment="content">
+        <div class="toolbar">
+            <h1>Transação</h1>
+            <button class="btn-light" hx-get="/transacoes" hx-target="#content" hx-swap="innerHTML">Voltar</button>
+        </div>
+        <dl class="detail card">
+            <dt>ID</dt><dd th:text="${transacao.idTransacao}"></dd>
+            <dt>Data/Hora</dt><dd th:text="${transacao.dataHora}"></dd>
+            <dt>Conta</dt><dd th:text="${transacao.conta.numero}"></dd>
+            <dt>Produto</dt><dd th:text="${transacao.produto.nome}"></dd>
+            <dt>Tipo</dt><dd th:text="${transacao.tipoTransacao.descricao}"></dd>
+            <dt>Contratação</dt><dd th:text="${transacao.contratacao != null} ? ${transacao.contratacao.idContratacao} : '—'"></dd>
+            <dt>Valor</dt><dd th:text="${transacao.valor}"></dd>
+            <dt>Idempotência</dt><dd th:text="${transacao.idIdempotencia}"></dd>
+        </dl>
+    </div>
+</main>
+</body>
+</html>

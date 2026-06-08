@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head th:replace="~{fragments/menu :: head('Contratação')}"></head>
+<body>
+<nav th:replace="~{fragments/menu :: menu('contratacoes')}"></nav>
+<main>
+    <div id="alerts"></div>
+    <div id="content">
+        <div th:fragment="form" class="card">
+            <h1 th:text="${titulo}">Contratação</h1>
+            <form th:object="${form}" th:attr="hx-post=${hxUrl}" hx-target="#content" hx-swap="innerHTML">
+                <label>Cliente
+                    <select th:field="*{idCliente}">
+                        <option value="">Selecione...</option>
+                        <option th:each="c : ${clientes}" th:value="${c.idCliente}"
+                                th:text="${c.nome + ' — ' + c.cpf}"></option>
+                    </select>
+                    <span class="error" th:errors="*{idCliente}"></span>
+                </label>
+                <label>Produto
+                    <select th:field="*{idProduto}">
+                        <option value="">Selecione...</option>
+                        <option th:each="p : ${produtos}" th:value="${p.idProduto}" th:text="${p.nome}"></option>
+                    </select>
+                    <span class="error" th:errors="*{idProduto}"></span>
+                </label>
+                <label>Data de Contratação
+                    <input type="date" th:field="*{dataContratacao}"/>
+                    <span class="error" th:errors="*{dataContratacao}"></span>
+                </label>
+                <label>Status
+                    <select th:field="*{status}">
+                        <option value="">Selecione...</option>
+                        <option th:each="s : ${statusList}" th:value="${s}" th:text="${s}"></option>
+                    </select>
+                    <span class="error" th:errors="*{status}"></span>
+                </label>
+                <div class="actions">
+                    <button type="submit">Salvar</button>
+                    <button type="button" class="btn-light" hx-get="/contratacoes" hx-target="#content" hx-swap="innerHTML">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>
