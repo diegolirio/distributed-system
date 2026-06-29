@@ -9,11 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderKafkaProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
-    private final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper;
     private static final String TOPIC = "order.created";
 
-    public OrderKafkaProducer(KafkaTemplate<String, String> kafkaTemplate) {
+    public OrderKafkaProducer(KafkaTemplate<String, String> kafkaTemplate, ObjectMapper mapper) {
         this.kafkaTemplate = kafkaTemplate;
+        this.mapper = mapper;
     }
 
     public void publish(Order order) {

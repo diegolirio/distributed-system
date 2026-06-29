@@ -4,14 +4,14 @@ import ai.analizza.system.async.kafka.TestcontainersConfiguration;
 import ai.analizza.system.async.kafka.model.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.Import;
 import reactor.test.StepVerifier;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@SpringBootTest
+@DataMongoTest
 @Import(TestcontainersConfiguration.class)
 class OrderRepositoryTest {
 
