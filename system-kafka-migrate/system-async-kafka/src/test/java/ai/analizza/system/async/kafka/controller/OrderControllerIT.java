@@ -8,10 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import ai.analizza.system.async.kafka.repository.OrderRepository;
-import ai.analizza.system.async.kafka.kafka.OrderKafkaProducer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.http.MediaType;
 import reactor.core.publisher.Mono;
@@ -20,7 +16,7 @@ import static org.mockito.Mockito.when;
 import java.math.BigDecimal;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class OrderControllerTest {
+class OrderControllerIT {
 
     @org.springframework.boot.test.web.server.LocalServerPort
     private int port;
@@ -31,12 +27,6 @@ class OrderControllerTest {
     void setUp() {
         this.webTestClient = WebTestClient.bindToServer().baseUrl("http://localhost:" + port).build();
     }
-
-    @MockitoBean
-    private OrderRepository orderRepository;
-
-    @MockitoBean
-    private OrderKafkaProducer orderKafkaProducer;
 
     @MockitoBean
     private OrderService orderService;
