@@ -19,6 +19,11 @@ public class KafkaConfig {
     }
 
     @Bean
+    public NewTopic orderCreatedDltTopic() {
+        return TopicBuilder.name("order.created-dlt").build();
+    }
+
+    @Bean
     public DefaultErrorHandler errorHandler(KafkaOperations<?, ?> kafkaTemplate) {
         // Send to topic.DLT upon failure
         DeadLetterPublishingRecoverer recoverer = new DeadLetterPublishingRecoverer(kafkaTemplate);
