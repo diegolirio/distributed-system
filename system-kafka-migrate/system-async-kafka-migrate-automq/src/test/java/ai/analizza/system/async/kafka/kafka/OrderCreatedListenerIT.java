@@ -37,11 +37,6 @@ public class OrderCreatedListenerIT {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @DynamicPropertySource
-    static void configureProperties(DynamicPropertyRegistry registry) {
-        registry.add("payment.service.url", () -> "http://localhost:8081");
-    }
-
     @BeforeEach
     void setUp() {
         orderRepository.deleteAll().block();
