@@ -1,6 +1,5 @@
 package br.com.ralvin.propertyanalysis.analysis;
 
-import dev.langchain4j.model.chat.Capability;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +16,6 @@ public class GeminiChatModelConfig {
 		return GoogleAiGeminiChatModel.builder()
 				.apiKey(apiKey)
 				.modelName(modelName)
-				.supportedCapabilities(Capability.RESPONSE_FORMAT_JSON_SCHEMA)
 				.build();
 	}
 }

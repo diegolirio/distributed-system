@@ -1,6 +1,5 @@
 package br.com.ralvin.propertyanalysis.analysis;
 
-import dev.langchain4j.model.chat.Capability;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 import org.jsoup.Jsoup;
@@ -27,7 +26,6 @@ class LangChain4jPropertiesAnalysisIntegrationTest {
 		ChatModel geminiChatModel = GoogleAiGeminiChatModel.builder()
 				.apiKey(System.getenv("GEMINI_API_KEY"))
 				.modelName("gemini-2.5-flash")
-				.supportedCapabilities(Capability.RESPONSE_FORMAT_JSON_SCHEMA)
 				.build();
 		analysis = new LangChain4jPropertiesAnalysis(geminiChatModel);
 		pageContent = Jsoup.parse(new File("src/test/resources/fixtures/leilao-sample.html"), "UTF-8")

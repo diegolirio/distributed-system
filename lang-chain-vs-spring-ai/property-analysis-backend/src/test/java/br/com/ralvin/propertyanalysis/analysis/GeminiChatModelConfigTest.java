@@ -9,11 +9,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class GeminiChatModelConfigTest {
 
 	@Test
-	void buildsChatModelWithJsonSchemaCapabilityEnabled() {
+	void buildsChatModelWithoutStrictJsonSchemaCapability() {
 		ChatModel chatModel = new GeminiChatModelConfig()
 				.geminiChatModel("fake-key-for-test", "gemini-2.5-flash");
 
 		assertThat(chatModel).isNotNull();
-		assertThat(chatModel.supportedCapabilities()).contains(Capability.RESPONSE_FORMAT_JSON_SCHEMA);
+		assertThat(chatModel.supportedCapabilities()).doesNotContain(Capability.RESPONSE_FORMAT_JSON_SCHEMA);
 	}
 }
