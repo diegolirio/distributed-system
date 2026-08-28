@@ -1,6 +1,8 @@
 package br.com.ralvin.propertyanalysis.analysis;
 
 import br.com.ralvin.propertyanalysis.analysis.exception.InvalidAnalysisLinkException;
+import br.com.ralvin.propertyanalysis.analysis.exception.PageFetchException;
+import br.com.ralvin.propertyanalysis.analysis.exception.PropertyExtractionException;
 import br.com.ralvin.propertyanalysis.analysis.exception.UnsupportedAnalysisTypeException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +64,29 @@ class AnalysisControllerTest {
 						.param("type", "spring_ai")
 						.param("link", "https://example.com/leilao/1"))
 				.andExpect(status().isNotImplemented());
+	}
+
+	@Test
+	void returns502OnPageFetchFailure() throws Exception {
+		when(service.analyze(eq("lang_chain"), eq("https://example.com/leilao/1")))
+				.thenThrow(new PageFetchException("boom", new java.io.IOException()));
+
+		mockMvc.perform(post("/analysis")
+						.param("type", "lang_chain")
+						.param("link", "https://example.com/leilao/1"))
+				.andExpect(status().isBadGateway())
+				.andExpect(jsonPath("$.message").value("Não foi possível acessar a página do leilão."));
+	}
+
+	@Test
+	void returns502OnPropertyExtractionFailure() throws Exception {
+		when(service.analyze(eq("lang_chain"), eq("https://example.com/leilao/1")))
+				.thenThrow(new PropertyExtractionException("boom", new RuntimeException()));
+
+		mockMvc.perform(post("/analysis")
+						.param("type", "lang_chain")
+						.param("link", "https://example.com/leilao/1"))
+				.andExpect(status().isBadGateway())
+				.andExpect(jsonPath("$.message").value("Não foi possível extrair os dados do imóvel. Tente novamente."));
 	}
 }

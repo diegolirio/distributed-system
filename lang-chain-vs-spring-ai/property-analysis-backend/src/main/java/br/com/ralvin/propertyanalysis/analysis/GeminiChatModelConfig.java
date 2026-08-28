@@ -13,6 +13,10 @@ public class GeminiChatModelConfig {
 	public ChatModel geminiChatModel(
 			@Value("${gemini.api-key}") String apiKey,
 			@Value("${gemini.model-name:gemini-2.5-flash}") String modelName) {
+		// Deliberately NOT setting Capability.RESPONSE_FORMAT_JSON_SCHEMA: langchain4j-google-ai-gemini's
+		// SchemaMapper never propagates `nullable`, so Gemini's strict schema mode cannot emit null for
+		// absent fields (it invents 0/-1 instead). Null handling is enforced via the prompt in
+		// LangChain4jPropertiesAnalysis.PropertyExtractor. Re-enabling this will regress condominioMensal.
 		return GoogleAiGeminiChatModel.builder()
 				.apiKey(apiKey)
 				.modelName(modelName)

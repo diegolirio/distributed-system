@@ -4,6 +4,8 @@ import br.com.ralvin.propertyanalysis.analysis.exception.InvalidAnalysisLinkExce
 import br.com.ralvin.propertyanalysis.analysis.exception.PageFetchException;
 import br.com.ralvin.propertyanalysis.analysis.exception.PropertyExtractionException;
 import br.com.ralvin.propertyanalysis.analysis.exception.UnsupportedAnalysisTypeException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class AnalysisExceptionHandler {
+
+	private static final Logger log = LoggerFactory.getLogger(AnalysisExceptionHandler.class);
 
 	@ExceptionHandler(InvalidAnalysisLinkException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -21,12 +25,14 @@ public class AnalysisExceptionHandler {
 	@ExceptionHandler(PageFetchException.class)
 	@ResponseStatus(HttpStatus.BAD_GATEWAY)
 	public ErrorResponse handleFetchFailure(PageFetchException e) {
+		log.warn("Page fetch failed", e);
 		return new ErrorResponse("Não foi possível acessar a página do leilão.");
 	}
 
 	@ExceptionHandler(PropertyExtractionException.class)
 	@ResponseStatus(HttpStatus.BAD_GATEWAY)
 	public ErrorResponse handleExtractionFailure(PropertyExtractionException e) {
+		log.warn("Property extraction failed", e);
 		return new ErrorResponse("Não foi possível extrair os dados do imóvel. Tente novamente.");
 	}
 

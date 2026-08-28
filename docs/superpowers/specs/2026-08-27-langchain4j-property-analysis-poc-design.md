@@ -28,6 +28,12 @@ Google Gemini, via `langchain4j-google-ai-gemini` (Gemini Developer API, API
 key auth — not Vertex AI). API key read from env var `GEMINI_API_KEY`. App
 fails fast at startup if the key is missing.
 
+`Capability.RESPONSE_FORMAT_JSON_SCHEMA` was deliberately NOT enabled on the
+`GoogleAiGeminiChatModel` bean: `langchain4j-google-ai-gemini`'s `SchemaMapper`
+never propagates `nullable`, so Gemini's strict schema mode cannot emit null
+for absent fields and fabricates values instead — null handling is enforced
+via the extraction prompt instead.
+
 ## Scaffold
 
 Generated via the `ralvin-new-simple-project` skill/command inside
