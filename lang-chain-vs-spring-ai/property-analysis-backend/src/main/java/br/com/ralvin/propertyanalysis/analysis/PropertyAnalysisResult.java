@@ -32,7 +32,7 @@ public record PropertyAnalysisResult(
 		@Description("Valor do IPTU anual em reais, sem formatação")
 		BigDecimal iptuAnual,
 
-		@Description("Valor do condomínio mensal em reais, sem formatação")
+		@Description("Valor do condomínio mensal em reais, sem formatação. Se não informado no conteúdo, retorne null (nunca -1 ou 0)")
 		BigDecimal condominioMensal
 ) {
 }
