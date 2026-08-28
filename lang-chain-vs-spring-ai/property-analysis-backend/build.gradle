@@ -22,6 +22,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
 	implementation 'dev.langchain4j:langchain4j:1.19.0'
 	implementation 'dev.langchain4j:langchain4j-google-ai-gemini:1.19.0'
+	implementation 'org.jsoup:jsoup:1.23.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-actuator-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
