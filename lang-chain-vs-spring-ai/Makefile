@@ -1,6 +1,7 @@
 BACKEND_DIR  := property-analysis-backend
 FRONTEND_DIR := property-analysis-frontend
 GRADLEW      := ./gradlew
+ENV_FILE     := env.local
 
 BACKEND_PORT  ?= 8080
 FRONTEND_PORT ?= 3000
@@ -60,12 +61,14 @@ run: $(FRONTEND_DIR)/node_modules ## Roda backend e frontend juntos (Ctrl+C ence
 	@echo "frontend -> http://localhost:$(FRONTEND_PORT)"
 	@echo ""
 	@trap 'kill 0' INT TERM; \
+		set -a; [ -f $(ENV_FILE) ] && . ./$(ENV_FILE); set +a; \
 		( cd $(BACKEND_DIR) && $(GRADLEW) bootRun --console=plain 2>&1 | awk '{ print "[backend]  " $$0; fflush() }' ) & \
 		( cd $(FRONTEND_DIR) && npm run dev 2>&1 | awk '{ print "[frontend] " $$0; fflush() }' ) & \
 		wait
 
 .PHONY: run-backend
 run-backend: ## Roda somente o backend
+	@set -a; [ -f $(ENV_FILE) ] && . ./$(ENV_FILE); set +a; \
 	cd $(BACKEND_DIR) && $(GRADLEW) bootRun
 
 .PHONY: run-frontend
